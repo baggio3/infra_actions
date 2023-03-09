@@ -61,7 +61,7 @@ build_and_push_to_docker_hub:
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: ваш-логин-на-docker-hub/ваш-репозиторий-на-docker-hub:latest
+          tags: baggio3/infra_actions:latest
 
 deploy:
   runs-on: ubuntu-latest
@@ -75,6 +75,6 @@ deploy:
       key: ${{ secret.SSH_KEY }}
       passphrase: ${{ secret.PASSPHRASE }}
       script:
-        sudo docker pull baggio3/infra_actions:v1.001
+        sudo docker pull baggio3/infra_actions:latest
         sudo docker stop $(sudo docker ps -a -q)
-        sudo docker run --rm -d -p 5000:5000 baggio3/infra_actions:v1.001
+        sudo docker run --rm -d -p 5000:5000 baggio3/infra_actions:latest
